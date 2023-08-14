@@ -1,13 +1,17 @@
 package ECommerce.backend.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     Long Id;
+    @Column
+    String name;
+    @Column
+    String email;
+    @Column
+    String password;
+
 }

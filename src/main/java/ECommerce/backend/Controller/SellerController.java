@@ -4,12 +4,12 @@ import ECommerce.backend.Model.Seller;
 import ECommerce.backend.Service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 
 @RestController
+@CrossOrigin("*")
 public class SellerController {
 
     @Autowired
@@ -17,11 +17,12 @@ public class SellerController {
     @PostMapping("/seller-signup")
     public ResponseEntity<?> createSeller(@RequestBody Seller seller){
         try {
-            if (seller!=null){
+            if (seller.getEmail().length()>0&& seller.getPassword().length()>0 && seller.getName().length()>0){
                 this.sellerService.createSeller(seller);
                 return ResponseEntity.ok("Seller Registered Successfully");
             }else {
                 return ResponseEntity.ok("Incomplete Data");
+
             }
         }
         catch (Exception ex){
@@ -29,4 +30,5 @@ public class SellerController {
             return ResponseEntity.ok("error1");
         }
     }
+
 }

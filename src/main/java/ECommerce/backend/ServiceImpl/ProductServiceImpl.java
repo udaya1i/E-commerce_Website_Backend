@@ -3,7 +3,6 @@ package ECommerce.backend.ServiceImpl;
 import ECommerce.backend.Model.Product;
 import ECommerce.backend.Repository.ProductRepository;
 import ECommerce.backend.Service.ProductService;
-import org.hibernate.hql.internal.ast.tree.ResolvableNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -29,8 +28,24 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(Long id, Product product) {
-        return null;
+        Product product1 = this.productRepository.findById(id).get();
+        product1.setProductCatagory(product.getProductCatagory());
+        product1.setProductColor(product.getProductColor());
+        product1.setProductName(product.getProductName());
+        product1.setProductImage(product.getProductImage());
+        product1.setDescription(product.getDescription());
+        product1.setProductPrice(product.getProductPrice());
+        this.productRepository.save(product1);
+        return product1;
+    }
+    @Override
+    public Optional<Product> getProductById(Long id){
+     return this.productRepository.findById(id);
     }
 
+    @Override
+    public void deleteProductById(Long Id) {
+        this.productRepository.deleteById(Id);
+    }
 
 }

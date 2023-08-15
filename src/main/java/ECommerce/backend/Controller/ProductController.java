@@ -5,6 +5,9 @@ import ECommerce.backend.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
 @RestController
 @CrossOrigin("*")
 public class ProductController {
@@ -50,5 +53,31 @@ public class ProductController {
     }catch (Exception ex){
           return  ResponseEntity.internalServerError().body("Internal Server Error");
     }
+    }
+    @GetMapping("/get-Product-by-id/{id}")
+    public Optional<Product> getProductById(@PathVariable Long id){
+        try{
+            if (this.productService.getProductById(id)!=null){
+                return this.productService.getProductById(id);
+            }
+            else {
+                return null;
+            }
+        }catch (Exception ex){
+            System.out.println("Error");
+            System.out.println(ex);
+            return null;
+        }
+    }
+    @DeleteMapping("delete-Product/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id){
+        try{
+            this.productService.deleteProductById(id);
+            return ResponseEntity.ok("Product Deleted Successfully!");
+        }
+        catch (Exception ex){
+            System.out.println(ex);
+            return ResponseEntity.internalServerError().body("Internal Server Error");
+        }
     }
 }

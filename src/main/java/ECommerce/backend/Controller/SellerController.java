@@ -5,9 +5,6 @@ import ECommerce.backend.Service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
-
-
 @RestController
 @CrossOrigin("*")
 public class SellerController {
@@ -21,14 +18,12 @@ public class SellerController {
                 this.sellerService.createSeller(seller);
                 return ResponseEntity.ok("Seller Registered Successfully");
             }else {
-                return ResponseEntity.ok("Incomplete Data");
-
+                return ResponseEntity.badRequest().body("Incomplete Data");
             }
         }
         catch (Exception ex){
             System.out.println(ex);
-            return ResponseEntity.ok("error1");
+            return ResponseEntity.internalServerError().body("error1");
         }
     }
-
 }

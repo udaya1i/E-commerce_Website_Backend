@@ -3,56 +3,54 @@ package ECommerce.backend.Model;
 import javax.persistence.*;
 
 @Entity
-public class User{
+@Table (name = "User_table")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @Column
-    String name;
-    @Column
-    String email;
-    @Column
-    String password;
+    String username;
+    String userEmail;
+    String userPassword;
 
-    public void setId(Long id) {
+    public User() {
+    }
+
+    public User(Long id, String username, String userEmail, String userPassword) {
         this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+        this.username = username;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public User() {
-    }
-
-    public User(Long id, String name, String email, String password) {
+    public void setId(Long id) {
         this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 }

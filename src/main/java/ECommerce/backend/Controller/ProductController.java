@@ -70,19 +70,7 @@ public class ProductController {
             return null;
         }
     }
-    @DeleteMapping("/delete-Product/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable Long id){
-        try{
-            this.productService.deleteProductById(id);
-            return ResponseEntity.ok("Product Deleted Successfully!");
-        }
-        catch (Exception ex){
-            System.out.println(ex);
-            return ResponseEntity.internalServerError().body("Internal Server Error");
-        }
-    }
-
-    @GetMapping("/get-product-by-name/{name}")
+        @GetMapping("/get-product-by-name/{name}")
     public ResponseEntity<?> getProductByName(@PathVariable String name){
         try {
            if (this.productService.getProductByName(name).isEmpty()){
@@ -95,6 +83,15 @@ public class ProductController {
             System.out.println(ex);
             System.out.println("Internal Server Error");
         return ResponseEntity.internalServerError().body("Internal Server Error");
+        }
+    }
+    @DeleteMapping("delete-product/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id){
+        try{
+            this.productService.deleteProductById(id);
+            return ResponseEntity.ok("Product Deleted Successfully!!");
+        }catch (Exception ex){
+            return ResponseEntity.internalServerError().body("Internal Server Error");
         }
     }
 }

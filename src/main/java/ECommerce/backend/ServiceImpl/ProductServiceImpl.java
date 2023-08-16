@@ -44,8 +44,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProductById(Long Id) {
-        this.productRepository.deleteById(Id);
+    public void deleteProductById(Long id) {
+    this.productRepository.deleteById(id);
     }
 
     @Override

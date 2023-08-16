@@ -26,4 +26,15 @@ public class SellerController {
             return ResponseEntity.internalServerError().body("error1");
         }
     }
+    @GetMapping("/seller-login/{user}/{password}")
+    public Seller sellerLogin(@PathVariable String user, @PathVariable String password){
+        try{
+          return  this.sellerService.loginUser(user, password);
+//            return ResponseEntity.ok("Login Successfully");
+        }catch (Exception ex){
+            System.out.println(ex);
+//            return ResponseEntity.badRequest().body("Internal Server Error");
+            return null;
+        }
+    }
 }

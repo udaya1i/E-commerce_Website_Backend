@@ -4,10 +4,7 @@ import ECommerce.backend.Model.User;
 import ECommerce.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("*")
@@ -22,6 +19,17 @@ public class UserController {
             return ResponseEntity.ok("User Created Successfully!");
         }catch (Exception ex){
             return ResponseEntity.internalServerError().body("Internal Server Error!!!");
+        }
+    }
+    @GetMapping("login-user/{email}/{password}")
+    public User loginUser(@PathVariable String email, @PathVariable String password){
+        try{
+           return this.userService.loginUser(email, password);
+//         return ResponseEntity.ok("Login Successfull");
+        }catch (Exception ex){
+            System.out.println(ex);
+//            return ResponseEntity.internalServerError().body("Internal Server Error");
+        return null;
         }
     }
 }

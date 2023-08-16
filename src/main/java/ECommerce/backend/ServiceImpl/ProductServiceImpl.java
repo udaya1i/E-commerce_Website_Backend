@@ -48,4 +48,8 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository.deleteById(Id);
     }
 
+    @Override
+    public List<Product> getProductByName(String name) {
+    return this.productRepository.findProductsByProductName(name);
+    }
 }

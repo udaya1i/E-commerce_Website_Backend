@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -69,7 +70,7 @@ public class ProductController {
             return null;
         }
     }
-    @DeleteMapping("delete-Product/{id}")
+    @DeleteMapping("/delete-Product/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id){
         try{
             this.productService.deleteProductById(id);
@@ -78,6 +79,22 @@ public class ProductController {
         catch (Exception ex){
             System.out.println(ex);
             return ResponseEntity.internalServerError().body("Internal Server Error");
+        }
+    }
+
+    @GetMapping("/get-product-by-name/{name}")
+    public ResponseEntity<?> getProductByName(@PathVariable String name){
+        try {
+           if (this.productService.getProductByName(name).isEmpty()){
+               return ResponseEntity.ok("No Data Found");
+           }else {
+                this.productService.getProductByName(name);
+             return ResponseEntity.ok(this.productService.getProductByName(name).toArray());
+           }
+        }catch (Exception ex){
+            System.out.println(ex);
+            System.out.println("Internal Server Error");
+        return ResponseEntity.internalServerError().body("Internal Server Error");
         }
     }
 }
